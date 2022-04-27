@@ -8,6 +8,10 @@
 
 ![WRRC pic](./pic/WRRC.jpg)
 
+## The tree structure of my application.
+
+![tree pic](<./pic/Screenshot%20(18).png>)
+
 ## Overview
 
 ## Getting Started
@@ -24,6 +28,7 @@
 8. Create a function to handle the server error (status 500)
 9. Create a function to handle "page not found error" (status 404)
 10. Add Documentation in your README file
+11. Create a function to handle the 3rd party API calls
 
 ## Project Features
 
@@ -40,3 +45,15 @@ How long did it take you to complete this assignment? And, before you started, h
 It take about half hour.
 
 Around the same time.
+
+## Q&A for the task 12
+
+What observations or questions do you have about what you’ve learned so far?
+
+Nothing, so far.
+
+How long did it take you to complete this assignment? And, before you started, how long did you think it would take you to complete this assignment?
+
+It take about half hour.
+
+Around 1 hour.
