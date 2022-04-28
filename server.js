@@ -21,6 +21,8 @@ app.get('/trending', hundleTrending);
 app.get('/search', hundleSearch);
 app.get('/id', hundleSearchId);
 app.get('/image', hundleImage);
+app.get('/topRated', hundleTopRated);
+
 
 // handle the Error:
 app.use(function (err, req, res, text) {
@@ -59,13 +61,26 @@ function hundleTrending(req, res) {
     })
     .catch((error) => {
       console.log(error);
-      res.send("Inside catch")
+      res.send("Inside catch");
     })
 }
 
 function hundleSearch(req, res) {
   let movieName = req.query.movieName;
   let url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${movieName}&page=2`;
+  // axios.get().then().catch() 
+  axios.get(url)
+    .then(result => {
+      // console.log(result.data.results);
+      res.json(result.data.results)
+    })
+    .catch((error) => {
+      console.log(error);
+      res.send("Searching for data")
+    })
+}
+function hundleTopRated(req, res) {
+  let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&page=1`;
   // axios.get().then().catch() 
   axios.get(url)
     .then(result => {
@@ -93,7 +108,7 @@ function hundleSearchId(req, res) {
 }
 function hundleImage(req, res) {
   let movieId = req.query.movieId;
-  let url = `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=${apiKey}&language=en-US`;
+  let url = `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=${apiKey}`;
   // axios.get().then().catch() 
   axios.get(url)
     .then(result => {
