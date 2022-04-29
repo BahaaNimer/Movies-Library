@@ -6,7 +6,11 @@
 
 ## WRRC
 
-![WRRC pic](./pic/WRRC.jpg)
+![WRRC1 pic](./pic/WRRC.jpg)
+
+![WRRC2 pic](./pic/WRRC2.jpg)
+
+![WRRC3 pic](./pic/WRRC3.jpg)
 
 ## The tree structure of my application.
 
@@ -29,6 +33,9 @@
 9. Create a function to handle "page not found error" (status 404)
 10. Add Documentation in your README file
 11. Create a function to handle the 3rd party API calls
+12. create a post request to save a specific movie to database
+13. Create a get request to get all the data from the database
+14. I use postgresql to create database
 
 ## Project Features
 
@@ -47,6 +54,18 @@ It take about half hour.
 Around the same time.
 
 ## Q&A for the task 12
+
+What observations or questions do you have about what you’ve learned so far?
+
+Nothing, so far.
+
+How long did it take you to complete this assignment? And, before you started, how long did you think it would take you to complete this assignment?
+
+It take about half hour.
+
+Around 1 hour.
+
+## Q&A for the task 13
 
 What observations or questions do you have about what you’ve learned so far?
 
