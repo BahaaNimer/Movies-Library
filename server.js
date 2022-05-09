@@ -1,6 +1,6 @@
 'use strict'
 
-const url = 'postgres://nimer:224212@localhost:5432/movie'
+const url = `postgres://nimer:224212@localhost:5432/movie`
 require('dotenv').config();
 // Declare Variables:
 const express = require('express');
@@ -9,6 +9,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const axios = require('axios').default;
 const apiKey = process.env.API_KEY;
+// const pass = process.env.PASS;
 
 const { Client } = require('pg')
 const client = new Client(url)
@@ -21,9 +22,12 @@ app.use(bodyParser.json())
 const PORT = 3000;
 
 // Raouts:
+app.put("/UPDATE/:updateName", handleUpdate);
+app.delete("/DELETE", handleDelete);
 app.post("/addMovie", handleAdd);
 app.get("/getMovies", handleGet);
-app.use(handleError);
+app.get("/getMoviesById", handleGetById);
+// app.use(handleError);
 // app.get('/', handleData);
 // app.get('/favorite', handleFavorite);
 // app.get('/error', (req, res) => res.send(error()));
@@ -48,29 +52,58 @@ app.use(handleError);
 // });
 
 // Function: 
+function handleUpdate(req, res) {
+  const { name, time, summary, image } = req.body;
+  const { updateName } = req.params;
+  let sql = `UPDATE movie SET name=$1, time=$2, summary=$3, image=$4 WHERE id = $5 RETURNING *;`  // sql query
+  let values = [name, time, summary, image, updateName];
+  client.query(sql, values).then((result) => {
+    // console.log(result.rows);
+    return res.status(200).json(result.rows);
+  }).catch()
+}
+function handleDelete(req, res) {
+  const  movieId  = req.query.id
+  let sql = 'DELETE FROM movie WHERE id=$1;'
+  let value = [movieId];
+  client.query(sql, value).then(result => {
+    console.log(result);
+    res.send("deleted");
+  }
+  ).catch()
+}
+
 function handleAdd(req, res) {
   const { name, time, summary, image } = req.body;
 
   let sql = 'INSERT INTO movie(name,time,summary,image ) VALUES($1, $2, $3, $4) RETURNING *;' // sql query
   let values = [name, time, summary, image];
   client.query(sql, values).then((result) => {
-    console.log(result.rows);
-    return res.status(201).json(result.rows[0]);
+    // console.log(result.rows);
+    return res.status(201).json(result.rows);
   }).catch()
 }
 function handleGet(req, res) {
 
   let sql = 'SELECT * from movie;'
   client.query(sql).then((result) => {
-    console.log(result);
+    // console.log(result.rows);
     res.json(result.rows);
-  }).catch((err) => {
-    handleError(err, req, res);
-  });
+  }).catch();
 }
-function handleError(error, req, res) {
-  res.status(500).send(error)
+function handleGetById(req, res) {
+
+  const { id } = req.query;
+  let sql = 'SELECT * from movie WHERE id=$1;'
+  let value = [id];
+  client.query(sql, value).then((result) => {
+    // console.log(result);
+    res.json(result.rows);
+  }).catch();
 }
+// function handleError(error, req, res) {
+//   res.status(500).send(error)
+// }
 // function handleData(req, res) {
 //   let result = [];
 //   let newMovie = new Movie(movieData.title, movieData.poster_path, movieData.overview)
