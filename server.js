@@ -1,21 +1,21 @@
 'use strict'
 
-const url = `postgres://nimer:${pass}@localhost:5432/movie`
 require('dotenv').config();
+// const url = `postgres://nimer:224212@localhost:5432/movie`
 
 // Declare Variables:
 
 const express = require('express');
-// const movieData = require('./Movie_data/data.json');
+const movieData = require('./Movie_data/data.json');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const axios = require('axios').default;
 const apiKey = process.env.API_KEY;
-const pass = process.env.PASS;
+// const pass = process.env.PASS;
 
 const { Client } = require('pg')
 // const client = new Client(url)
-const client = new pg.Client({
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
@@ -48,6 +48,8 @@ app.get('/topRated', hundleTopRated);
 
 
 // Function: 
+
+// for database: 
 function handleUpdate(req, res) {
   const { name, time, summary, image } = req.body;
   const { updateName } = req.params;
@@ -99,6 +101,8 @@ function handleGetById(req, res) {
 function handleError(error, req, res) {
   res.status(500).send(error)
 }
+
+// for 3rd API:
 function handleData(req, res) {
   let result = [];
   let newMovie = new Movie(movieData.title, movieData.poster_path, movieData.overview)
