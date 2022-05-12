@@ -26,7 +26,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-const PORT = 3000;
+const PORT = 3000 || 5000;
 
 // Raouts:
 
