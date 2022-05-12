@@ -35,7 +35,7 @@ app.delete("/DELETE", handleDelete);
 app.post("/addMovie", handleAdd);
 app.get("/getMovies", handleGet);
 app.get("/getMoviesById", handleGetById);
-app.use(handleError);
+// app.use(handleError);
 // app.get('/', handleData);
 // app.get('/favorite', handleFavorite);
 app.get('/', hundleHomePage);
@@ -99,9 +99,9 @@ function handleGetById(req, res) {
     res.json(result.rows);
   }).catch();
 }
-function handleError(error, req, res) {
-  res.status(500).send(error)
-}
+// function handleError(error, req, res) {
+//   res.status(500).send(error)
+// }
 
 // for local data
 // function handleData(req, res) {
@@ -214,11 +214,11 @@ client.connect().then(() => {
 
 // Constructor:
 
-function Movie(title, poster_path, overview) {
-  this.title = title
-  this.poster_path = poster_path
-  this.overview = overview
-}
+// function Movie(title, poster_path, overview) {
+//   this.title = title
+//   this.poster_path = poster_path
+//   this.overview = overview
+// }
 
 function Trend(id, title, release_date, poster_path, overview) {
   this.id = id;
