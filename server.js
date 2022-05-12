@@ -36,14 +36,15 @@ app.post("/addMovie", handleAdd);
 app.get("/getMovies", handleGet);
 app.get("/getMoviesById", handleGetById);
 app.use(handleError);
-app.get('/', handleData);
-app.get('/favorite', handleFavorite);
-// app.get('/error', (req, res) => res.send(error()));
+// app.get('/', handleData);
+// app.get('/favorite', handleFavorite);
+app.get('/', hundleHomePage);
 app.get('/trending', hundleTrending);
 app.get('/search', hundleSearch);
 app.get('/id', hundleSearchId);
 app.get('/image', hundleImage);
 app.get('/topRated', hundleTopRated);
+// app.get('/error', (req, res) => res.send(error()));
 
 
 
@@ -102,15 +103,27 @@ function handleError(error, req, res) {
   res.status(500).send(error)
 }
 
+// for local data
+// function handleData(req, res) {
+//   let result = [];
+//   let newMovie = new Movie(movieData.title, movieData.poster_path, movieData.overview)
+//   result.push(newMovie);
+//   res.json(result);
+// }
+// function handleFavorite(req, res) {
+//   res.send('Welcome to Favorite Page');
+// }
+
 // for 3rd API:
-function handleData(req, res) {
-  let result = [];
-  let newMovie = new Movie(movieData.title, movieData.poster_path, movieData.overview)
-  result.push(newMovie);
-  res.json(result);
-}
-function handleFavorite(req, res) {
-  res.send('Welcome to Favorite Page');
+function hundleHomePage(req, res) {
+  const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`;
+  axios.get(url)
+    .then(response => {
+      res.json(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    })
 }
 function hundleTrending(req, res) {
   const url = `https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}`;
