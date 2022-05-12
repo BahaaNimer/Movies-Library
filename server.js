@@ -14,7 +14,11 @@ const apiKey = process.env.API_KEY;
 const pass = process.env.PASS;
 
 const { Client } = require('pg')
-const client = new Client(url)
+// const client = new Client(url)
+const client = new pg.Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
 // Create app:
 
