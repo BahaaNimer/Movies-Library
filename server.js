@@ -6,7 +6,7 @@ require('dotenv').config();
 // Declare Variables:
 
 const express = require('express');
-const movieData = require('./Movie_data/data.json');
+// const movieData = require('./Movie_data/data.json');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const axios = require('axios').default;
