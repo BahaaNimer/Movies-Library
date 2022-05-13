@@ -115,9 +115,9 @@ function handleGetById(req, res) {
 // }
 
 // for 3rd API:
-function hundleHomePage(req, res) {
+async function hundleHomePage(req, res) {
   const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`;
-  axios.get(url)
+  await axios.get(url)
     .then(response => {
       res.json(response.data);
     })
