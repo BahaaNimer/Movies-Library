@@ -72,10 +72,10 @@ function handleDelete(req, res) {
   ).catch()
 }
 function handleAdd(req, res) {
-  const { name, time, summary, image } = req.body;
+  const { name, time, summary, image, comment } = req.body;
 
   let sql = 'INSERT INTO movie(name,time,summary,image,comment) VALUES($1, $2, $3, $4, $5) RETURNING *;' // sql query
-  let values = [name, time, summary, image];
+  let values = [name, time, summary, image, comment];
   client.query(sql, values).then((result) => {
     // console.log(result.rows);
     return res.status(201).json(result.rows);
