@@ -67,7 +67,7 @@ function handleDelete(req, res) {
   let value = [movieId];
   client.query(sql, value).then(result => {
     console.log(result);
-    res.send("deleted");
+    res.status(204).send("deleted");
   }
   ).catch()
 }
