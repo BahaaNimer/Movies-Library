@@ -1,7 +1,6 @@
 'use strict'
 
 require('dotenv').config();
-// const url = `postgres://nimer:224212@localhost:5432/movie`
 
 // Declare Variables:
 
@@ -12,6 +11,7 @@ const bodyParser = require('body-parser');
 const axios = require('axios').default;
 const apiKey = process.env.API_KEY;
 // const pass = process.env.PASS;
+const url = `postgres://nimer:224212@localhost:5432/movie`
 
 const { Client } = require('pg')
 // const client = new Client(url)
